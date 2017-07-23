@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Marco De Angelis",
+      "authorEmail": "marco.deangelis@mulgo.org",
+      "authorUrl": "https://github.com/o-slash"
+    }
+  }
+}
