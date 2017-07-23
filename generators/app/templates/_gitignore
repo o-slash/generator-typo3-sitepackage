@@ -1,0 +1,14 @@
+/vendor
+/web
+!/web/typo3conf
+/web/typo3conf/*
+!/web/typo3conf/LocalConfiguration.php
+!/web/typo3conf/AdditionalConfiguration.php
+!/web/typo3conf/PackageStates.php
+!/web/typo3conf/realurl_conf.php
+!/web/typo3conf/ext
+/web/typo3conf/ext/*
+!/web/typo3conf/ext/<%= sitepackageFolder %>
+*~
+*.log
+*.lock

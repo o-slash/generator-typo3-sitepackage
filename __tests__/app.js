@@ -6,12 +6,13 @@ var helpers = require('yeoman-test');
 describe('generator-typo-3-sitepackage:app', () => {
   beforeAll(() => {
     return helpers.run(path.join(__dirname, '../generators/app'))
-      .withPrompts({someAnswer: true});
+      .withPrompts({name: 'dummy-site'});
   });
 
   it('creates files', () => {
     assert.file([
-      'dummyfile.txt'
+      '.gitignore',
+      'composer.json'
     ]);
   });
 });

@@ -1,0 +1,30 @@
+{
+  "name": "<%= name %>",
+  "description": "<%= description %>",
+  "license": "UNLICENSED",
+  "homepage": "<%= homepage %>",
+  "version": "0.0.0",
+  "repositories": [{
+    "type": "composer",
+    "url": "https://composer.typo3.org/"
+  }],
+  "require": {
+    "typo3/cms": "<%= t3release %>",
+    "typo3-ter/realurl": "*",
+    "typo3-ter/news": "*",
+    "typo3-ter/metaseo": "*",
+    "typo3-ter/vhs": "*",
+    "helhum/typo3-console": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "<%= sitepackageVendor %>\\<%= sitepackageName %>\\": "typo3conf/ext/<%= sitepackageFolder %>/Classes/"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": "web"
+    }
+  }
+}
