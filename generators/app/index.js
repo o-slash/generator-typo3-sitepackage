@@ -63,6 +63,7 @@ module.exports = class extends Generator {
       props.sitepackageName = _.upperFirst(_.camelCase(props.name));
       props.sitepackageFolder = _.snakeCase(props.name);
       props.name = _.kebabCase(props.name);
+      props.vendor = _.kebabCase(props.company);
       this.props = props;
     });
   }
@@ -76,6 +77,11 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('_gitignore'),
       this.destinationPath('.gitignore'),
+      this.props
+    );
+    this.fs.copyTpl(
+      this.templatePath('sitepackage/_composer.json'),
+      this.destinationPath('web/typo3conf/ext/' + this.props.sitepackageFolder + '/composer.json'),
       this.props
     );
   }

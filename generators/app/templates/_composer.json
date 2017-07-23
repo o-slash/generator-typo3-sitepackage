@@ -1,9 +1,10 @@
 {
-  "name": "<%= name %>",
+  "name": "<%= vendor %>/<%= name %>",
   "description": "<%= description %>",
+  "type": "typo3-cms-website",
   "license": "UNLICENSED",
   "homepage": "<%= homepage %>",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "repositories": [{
     "type": "composer",
     "url": "https://composer.typo3.org/"

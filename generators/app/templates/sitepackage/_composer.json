@@ -1,0 +1,12 @@
+{
+    "name": "<%= vendor %>/<%= name %>-sitepackage",
+    "type": "typo3-cms-extension",
+    "description": "<%= name %> sitepackage",
+    "homepage": "<%= homepage %>",
+    "license": "UNLICENSED",
+    "keywords": ["TYPO3 CMS"],
+    "version": "1.0.0",
+    "require": {
+        "typo3/cms-core": "<%= t3release %>"
+    }
+}
