@@ -3,10 +3,17 @@
     "type": "typo3-cms-extension",
     "description": "<%= name %> sitepackage",
     "homepage": "<%= homepage %>",
+    "authors": [
+        {
+            "name": "<%= authorName %>",
+            "email": "<%= authorEmail %>"
+        }
+    ],
     "license": "UNLICENSED",
     "keywords": ["TYPO3 CMS"],
     "version": "1.0.0",
     "require": {
-        "typo3/cms-core": "<%= t3release %>"
+        "typo3/cms-core": "<%= composerTypo3Version %>",
+        "typo3/cms-fluid-styled-content": "<%= composerTypo3Version %>"
     }
 }

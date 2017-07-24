@@ -15,7 +15,19 @@ module.exports = class extends Generator {
       type: 'input',
       name: 'name',
       message: 'Website name',
-      default: this.appname
+      default: 'Example Site'
+    },
+    {
+      type: 'input',
+      name: 'authorName',
+      message: 'Author fullname',
+      default: 'John Smith'
+    },
+    {
+      type: 'input',
+      name: 'authorEmail',
+      message: 'Author email',
+      default: 'j.smith@example.com'
     },
     {
       type: 'input',
@@ -27,50 +39,69 @@ module.exports = class extends Generator {
       type: 'input',
       name: 'description',
       message: 'Website description',
-      default: ''
+      default: 'An example website'
     },
     {
       type: 'input',
       name: 'homepage',
       message: 'Project homepage',
-      default: 'https://github.com/my-company/my-website'
+      default: 'https://github.com/acme/exmaple-website'
     }, {
       type: 'list',
-      name: 't3release',
+      name: 'typo3Release',
       message: 'Typo3 relase',
       choices: [{
-        name: 'Typo3 8.7 LTS',
-        value: '^8.7.0'
-      },
-      {
         name: 'Typo3 7.6 LTS',
-        value: '^7.6.0'
+        value: '7LTS'
       },
       {
-        name: 'Typo3 6.2 LTS',
-        value: '^6.2.0'
+        name: 'Typo3 8.7 LTS',
+        value: '8LTS'
       },
       {
         name: 'latest stable',
-        value: '*'
+        value: 'LATEST'
       }
       ]
     }
     ];
 
     return this.prompt(prompts).then(props => {
-      props.sitepackageVendor = _.upperFirst(_.camelCase(props.company));
-      props.sitepackageName = _.upperFirst(_.camelCase(props.name));
-      props.sitepackageFolder = _.snakeCase(props.name);
-      props.nameLabel = _.kebabCase(props.name);
-      props.companyLabel = _.kebabCase(props.company);
+      // define project labels
+      props.nameLabel = _.toLower(_.replace(props.name, /[^a-zA-Z0-9]/g,''));
+      props.companyLabel = _.kebabCase(_.toLower(_.replace(props.company, /[^a-zA-Z0-9 ]/g,'')));
+
+      // define sitepackage variables
+      props.sitepackageVendor = _.upperFirst(_.camelCase(_.replace(_.toLower(props.company), /[^a-zA-Z0-9 ]/g,'')));
+      props.sitepackageName = _.upperFirst(props.nameLabel);
+      props.sitepackageFolder = props.nameLabel;
+
+      // define versions
+      switch (props.typo3Release) {
+        case '7LTS':
+          props.composerTypo3Version = '^7.6.0';
+          props.emconfTypo3Version = '7.6.0-7.6.99';
+          break;
+
+        case '8LTS':
+          props.composerTypo3Version = '^8.7.0';
+          props.emconfTypo3Version = '8.7.0-8.7.99';
+          break;
+        
+        default:
+          props.composerTypo3Version = '*';
+          props.emconfTypo3Version = '*';
+          break;
+      }
+
+
       this.props = props;
     });
   }
 
   writing() {
     this.fs.copyTpl(
-      this.templatePath('_composer.json'),
+      this.templatePath('composer.json'),
       this.destinationPath('composer.json'),
       this.props
     );
@@ -80,9 +111,13 @@ module.exports = class extends Generator {
       this.props
     );
     this.fs.copyTpl(
-      this.templatePath('sitepackage/_composer.json'),
-      this.destinationPath('web/typo3conf/ext/' + this.props.sitepackageFolder + '/composer.json'),
+      this.templatePath('sitepackage/**/*.*'),
+      this.destinationPath('web/typo3conf/ext/' + this.props.sitepackageFolder),
       this.props
+    );
+    this.fs.copy(
+      this.templatePath('sitepackage/**/.*'),
+      this.destinationPath('web/typo3conf/ext/' + this.props.sitepackageFolder)
     );
   }
 

@@ -2,15 +2,23 @@
   "name": "<%= companyLabel %>/<%= nameLabel %>",
   "description": "<%= description %>",
   "type": "typo3-cms-website",
+  "authors": [
+    {
+      "name": "<%= authorName %>",
+      "email": "<%= authorEmail %>"
+    }
+  ],
   "license": "UNLICENSED",
   "homepage": "<%= homepage %>",
   "version": "1.0.0",
-  "repositories": [{
-    "type": "composer",
-    "url": "https://composer.typo3.org/"
-  }],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://composer.typo3.org/"
+    }
+  ],
   "require": {
-    "typo3/cms": "<%= t3release %>",
+    "typo3/cms": "<%= composerTypo3Version %>",
     "typo3-ter/realurl": "*",
     "typo3-ter/news": "*",
     "typo3-ter/metaseo": "*",

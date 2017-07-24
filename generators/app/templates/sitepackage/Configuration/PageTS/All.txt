@@ -1,0 +1,7 @@
+#
+# PageTS for MyWebSite
+#
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:<%= nameLabel %>/Configuration/PageTS/RTE.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:<%= nameLabel %>/Configuration/PageTS/TCEFORM.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:<%= nameLabel %>/Configuration/PageTS/TCEMAIN.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:<%= nameLabel %>/Configuration/PageTS/Mod/WebLayout/BackendLayouts.txt">
