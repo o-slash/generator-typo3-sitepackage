@@ -1,5 +1,5 @@
 {
-  "name": "<%= vendor %>/<%= name %>",
+  "name": "<%= companyLabel %>/<%= nameLabel %>",
   "description": "<%= description %>",
   "type": "typo3-cms-website",
   "license": "UNLICENSED",

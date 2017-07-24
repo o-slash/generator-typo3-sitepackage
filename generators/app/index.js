@@ -62,8 +62,8 @@ module.exports = class extends Generator {
       props.sitepackageVendor = _.upperFirst(_.camelCase(props.company));
       props.sitepackageName = _.upperFirst(_.camelCase(props.name));
       props.sitepackageFolder = _.snakeCase(props.name);
-      props.name = _.kebabCase(props.name);
-      props.vendor = _.kebabCase(props.company);
+      props.nameLabel = _.kebabCase(props.name);
+      props.companyLabel = _.kebabCase(props.company);
       this.props = props;
     });
   }
