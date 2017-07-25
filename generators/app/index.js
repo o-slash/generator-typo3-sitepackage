@@ -15,37 +15,43 @@ module.exports = class extends Generator {
       type: 'input',
       name: 'name',
       message: 'Website name',
-      default: 'Example Site'
+      default: 'Example Site',
+      store   : true
     },
     {
       type: 'input',
       name: 'authorName',
       message: 'Author fullname',
-      default: 'John Smith'
+      default: 'John Smith',
+      store   : true
     },
     {
       type: 'input',
       name: 'authorEmail',
       message: 'Author email',
-      default: 'j.smith@example.com'
+      default: 'j.smith@example.com',
+      store   : true
     },
     {
       type: 'input',
       name: 'company',
       message: 'Company name',
-      default: 'ACME Inc.'
+      default: 'ACME Inc.',
+      store   : true
     },
     {
       type: 'input',
       name: 'description',
       message: 'Website description',
-      default: 'An example website'
+      default: 'An example website',
+      store   : true
     },
     {
       type: 'input',
       name: 'homepage',
       message: 'Project homepage',
-      default: 'https://github.com/acme/exmaple-website'
+      default: 'https://github.com/acme/exmaple-website',
+      store   : true
     }, {
       type: 'list',
       name: 'typo3Release',
@@ -62,7 +68,8 @@ module.exports = class extends Generator {
         name: 'latest stable',
         value: 'LATEST'
       }
-      ]
+      ],
+      store   : true
     }
     ];
 
@@ -81,16 +88,19 @@ module.exports = class extends Generator {
         case '7LTS':
           props.composerTypo3Version = '^7.6.0';
           props.emconfTypo3Version = '7.6.0-7.6.99';
+          props.phpVer = '56';
           break;
 
         case '8LTS':
           props.composerTypo3Version = '^8.7.0';
           props.emconfTypo3Version = '8.7.0-8.7.99';
+          props.phpVer = '71';
           break;
         
         default:
           props.composerTypo3Version = '*';
           props.emconfTypo3Version = '*';
+          props.phpVer = '71';
           break;
       }
 
@@ -101,6 +111,16 @@ module.exports = class extends Generator {
 
   writing() {
     this.fs.copyTpl(
+      this.templatePath('Dockerfile'),
+      this.destinationPath('Dockerfile'),
+      this.props
+    );
+    this.fs.copyTpl(
+      this.templatePath('docker-compose.yml'),
+      this.destinationPath('docker-compose.yml'),
+      this.props
+    );
+    this.fs.copyTpl(
       this.templatePath('composer.json'),
       this.destinationPath('composer.json'),
       this.props
@@ -109,6 +129,14 @@ module.exports = class extends Generator {
       this.templatePath('_gitignore'),
       this.destinationPath('.gitignore'),
       this.props
+    );
+    this.fs.copy(
+      this.templatePath('_htaccess'),
+      this.destinationPath('web/.htaccess')
+    );
+    this.fs.copy(
+      this.templatePath('FIRST_INSTALL'),
+      this.destinationPath('web/FIRST_INSTALL')
     );
     this.fs.copyTpl(
       this.templatePath('sitepackage/**/*.*'),
@@ -122,6 +150,5 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.spawnCommand('composer', ['install']);
   }
 };

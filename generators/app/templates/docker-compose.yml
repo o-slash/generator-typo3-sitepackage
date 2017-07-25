@@ -1,0 +1,39 @@
+
+version: '2'
+
+services:
+  mysql:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+
+  typo3:
+    image: <%=nameLabel %>:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      TYPO3_CONTEXT: "Development"
+      APACHE_RUN_USER: "root"
+      APACHE_RUN_GROUP: "root"
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www/html
+    command: |
+      bash -c 'bash -s <<EOF
+        composer install;
+        composer update;
+        /usr/sbin/apachectl -DFOREGROUND;
+      EOF'
+
+volumes:
+  mysql:
+
+networks:
+  net:
+    driver: bridge
