@@ -93,19 +93,22 @@ module.exports = class extends Generator {
         case '7LTS':
           props.composerTypo3Version = '^7.6.0';
           props.emconfTypo3Version = '7.6.0-7.6.99';
+          props.cleanTypo3Version = '5.6';
+          props.phpVer = '56';
+          break;
+
+        case '6LTS':
+          props.composerTypo3Version = '^6.2.0';
+          props.emconfTypo3Version = '6.2.0-6.2.99';
+          props.cleanTypo3Version = '6.2';
           props.phpVer = '56';
           break;
 
         case '8LTS':
           props.composerTypo3Version = '^8.7.0';
           props.emconfTypo3Version = '8.7.0-8.7.99';
+          props.cleanTypo3Version = '8.7';
           props.phpVer = '71';
-          break;
-
-        case '6LTS':
-          props.composerTypo3Version = '^6.2.0';
-          props.emconfTypo3Version = '6.2.0-6.2.99';
-          props.phpVer = '56';
           break;
 
         default:
