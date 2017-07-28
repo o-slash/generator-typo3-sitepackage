@@ -1,5 +1,5 @@
 {
-  "name": "generator-typo-3-sitepackage",
+  "name": "generator-typo3-sitepackage",
   "version": "0.0.0",
   "description": "Yeoman generator for Typo3 Web Sites with Site Package",
   "homepage": "https://github.com/o-slash/generator-typo3-sitepackage",

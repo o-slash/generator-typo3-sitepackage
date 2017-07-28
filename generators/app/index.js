@@ -8,7 +8,7 @@ module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the good ' + chalk.red('generator-typo-3-sitepackage') + ' generator!'
+      'Welcome to the good ' + chalk.red('generator-typo3-sitepackage') + ' generator!'
     ));
 
     const prompts = [{
