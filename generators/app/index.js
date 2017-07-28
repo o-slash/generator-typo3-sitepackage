@@ -16,70 +16,75 @@ module.exports = class extends Generator {
       name: 'name',
       message: 'Website name',
       default: 'Example Site',
-      store   : true
+      store: true
     },
     {
       type: 'input',
       name: 'authorName',
       message: 'Author fullname',
       default: 'John Smith',
-      store   : true
+      store: true
     },
     {
       type: 'input',
       name: 'authorEmail',
       message: 'Author email',
       default: 'j.smith@example.com',
-      store   : true
+      store: true
     },
     {
       type: 'input',
       name: 'company',
       message: 'Company name',
       default: 'ACME Inc.',
-      store   : true
+      store: true
     },
     {
       type: 'input',
       name: 'description',
       message: 'Website description',
       default: 'An example website',
-      store   : true
+      store: true
     },
     {
       type: 'input',
       name: 'homepage',
       message: 'Project homepage',
       default: 'https://github.com/acme/exmaple-website',
-      store   : true
+      store: true
     }, {
       type: 'list',
       name: 'typo3Release',
       message: 'Typo3 relase',
-      choices: [{
-        name: 'Typo3 7.6 LTS',
-        value: '7LTS'
-      },
-      {
-        name: 'Typo3 8.7 LTS',
-        value: '8LTS'
-      },
-      {
-        name: 'latest stable',
-        value: 'LATEST'
-      }
+      choices: [
+        {
+          name: 'Typo3 8.7 LTS',
+          value: '8LTS'
+        },
+        {
+          name: 'Typo3 7.6 LTS',
+          value: '7LTS'
+        },
+        {
+          name: 'Typo3 6.2 LTS',
+          value: '6LTS'
+        },
+        {
+          name: 'latest stable',
+          value: 'LATEST'
+        }
       ],
-      store   : true
+      store: true
     }
     ];
 
     return this.prompt(prompts).then(props => {
       // define project labels
-      props.nameLabel = _.toLower(_.replace(props.name, /[^a-zA-Z0-9]/g,''));
-      props.companyLabel = _.kebabCase(_.toLower(_.replace(props.company, /[^a-zA-Z0-9 ]/g,'')));
+      props.nameLabel = _.toLower(_.replace(props.name, /[^a-zA-Z0-9]/g, ''));
+      props.companyLabel = _.kebabCase(_.toLower(_.replace(props.company, /[^a-zA-Z0-9 ]/g, '')));
 
       // define sitepackage variables
-      props.sitepackageVendor = _.upperFirst(_.camelCase(_.replace(_.toLower(props.company), /[^a-zA-Z0-9 ]/g,'')));
+      props.sitepackageVendor = _.upperFirst(_.camelCase(_.replace(_.toLower(props.company), /[^a-zA-Z0-9 ]/g, '')));
       props.sitepackageName = _.upperFirst(props.nameLabel);
       props.sitepackageFolder = props.nameLabel;
 
@@ -96,7 +101,13 @@ module.exports = class extends Generator {
           props.emconfTypo3Version = '8.7.0-8.7.99';
           props.phpVer = '71';
           break;
-        
+
+        case '6LTS':
+          props.composerTypo3Version = '^6.2.0';
+          props.emconfTypo3Version = '6.2.0-6.2.99';
+          props.phpVer = '56';
+          break;
+
         default:
           props.composerTypo3Version = '*';
           props.emconfTypo3Version = '*';
