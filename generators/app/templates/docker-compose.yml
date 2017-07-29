@@ -21,7 +21,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - .:/var/www/html
+      - .:/var/www/site
 
 volumes:
   mysql:
