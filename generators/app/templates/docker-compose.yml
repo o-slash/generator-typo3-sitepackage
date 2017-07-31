@@ -12,23 +12,15 @@ services:
       MYSQL_ROOT_PASSWORD: 'password'
 
   typo3:
-    image: mulgo/typo3-fullstack:<%=cleanTypo3Version %>
+    image: mulgo/typo3-toolchain:<%=cleanTypo3Version %>
     build:
       context: .
-      dockerfile: Dockerfile
     environment:
       TYPO3_CONTEXT: "Development"
     ports:
       - 80:80
     volumes:
       - .:/var/www/site
-    command: |
-      bash -c 'bash -s <<EOF
-        composer install;
-        composer update;
-        chown -R apache:apache /var/www/site;
-        /usr/sbin/httpd -DFOREGROUND;
-      EOF'
 
 volumes:
   mysql:
