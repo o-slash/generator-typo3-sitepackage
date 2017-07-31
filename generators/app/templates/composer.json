@@ -32,7 +32,9 @@
   },
   "extra": {
     "typo3/cms": {
+      <% if (cleanTypo3Version !== '6.2') { %>
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      <% } %>
       "web-dir": "web"
     }
   }

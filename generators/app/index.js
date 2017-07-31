@@ -90,17 +90,19 @@ module.exports = class extends Generator {
 
       // define versions
       switch (props.typo3Release) {
-        case '7LTS':
-          props.composerTypo3Version = '^7.6.0';
-          props.emconfTypo3Version = '7.6.0-7.6.99';
-          props.cleanTypo3Version = '5.6';
-          props.phpVer = '56';
-          break;
-
         case '6LTS':
           props.composerTypo3Version = '^6.2.0';
           props.emconfTypo3Version = '6.2.0-6.2.99';
           props.cleanTypo3Version = '6.2';
+          props.firstInstallFileName = 'typo3conf/ENABLE_INSTALL_TOOL';
+          props.phpVer = '56';
+          break;
+
+        case '7LTS':
+          props.composerTypo3Version = '^7.6.0';
+          props.emconfTypo3Version = '7.6.0-7.6.99';
+          props.cleanTypo3Version = '7.6';
+          props.firstInstallFileName = 'FIRST_INSTALL';
           props.phpVer = '56';
           break;
 
@@ -108,6 +110,7 @@ module.exports = class extends Generator {
           props.composerTypo3Version = '^8.7.0';
           props.emconfTypo3Version = '8.7.0-8.7.99';
           props.cleanTypo3Version = '8.7';
+          props.firstInstallFileName = 'FIRST_INSTALL';
           props.phpVer = '71';
           break;
 
@@ -150,7 +153,7 @@ module.exports = class extends Generator {
     );
     this.fs.copy(
       this.templatePath('FIRST_INSTALL'),
-      this.destinationPath('web/FIRST_INSTALL')
+      this.destinationPath('web/' + this.props.firstInstallFileName)
     );
     this.fs.copyTpl(
       this.templatePath('sitepackage/**/*.*'),
