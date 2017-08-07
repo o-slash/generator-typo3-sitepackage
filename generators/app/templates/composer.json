@@ -19,10 +19,6 @@
   ],
   "require": {
     "typo3/cms": "<%= composerTypo3Version %>",
-    "typo3-ter/realurl": "*",
-    "typo3-ter/news": "*",
-    "typo3-ter/metaseo": "*",
-    "typo3-ter/vhs": "*",
     "helhum/typo3-console": "*"
   },
   "autoload": {
@@ -30,11 +26,17 @@
       "<%= sitepackageVendor %>\\<%= sitepackageName %>\\": "typo3conf/ext/<%= sitepackageFolder %>/Classes/"
     }
   },
+  "scripts": {
+    "post-install-cmd": [
+      "@php vendor/helhum/typo3-console/Scripts/typo3cms install:setup --non-interactive --database-user-name=<%= dbUser %> --database-user-password=<%= dbPasswd %> --database-host-name=<%= dbHost %> --database-name=<%= dbName %> --admin-user-name=admin --admin-password=password --site-name='<%= nameLabel %>' --site-setup-type=site"
+    ]
+  },
   "extra": {
+    "helhum/typo3-console": {
+        "install-extension-dummy": false
+    },
     "typo3/cms": {
-      <% if (cleanTypo3Version !== '6.2') { %>
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
-      <% } %>
       "web-dir": "web"
     }
   }

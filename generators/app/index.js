@@ -75,6 +75,34 @@ module.exports = class extends Generator {
         }
       ],
       store: true
+    },
+    {
+      type: 'input',
+      name: 'dbHost',
+      message: 'Typo3 DB hostname',
+      default: 'mysql',
+      store: true
+    },
+    {
+      type: 'input',
+      name: 'dbName',
+      message: 'Typo3 DB name',
+      default: 'typo3',
+      store: true
+    },
+    {
+      type: 'input',
+      name: 'dbUser',
+      message: 'Typo3 DB username',
+      default: 'root',
+      store: true
+    },
+    {
+      type: 'input',
+      name: 'dbPasswd',
+      message: 'Typo3 DB password',
+      default: 'password',
+      store: false
     }
     ];
 
